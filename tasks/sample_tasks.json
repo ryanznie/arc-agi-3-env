@@ -1,0 +1,12 @@
+[
+  {
+    "task_id": "complex-maze-001",
+    "instructions": "Navigate through the maze. You receive reward 1 only if you solve the puzzle before the budget runs out. Otherwise the reward is 0.",
+    "game_factory": "arcengine_example:complex_maze",
+    "game_kwargs": {},
+    "metadata": {
+      "difficulty": "example",
+      "source": "ARCEngine/examples/complex_maze.py"
+    }
+  }
+]

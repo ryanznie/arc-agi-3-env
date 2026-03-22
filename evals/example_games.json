@@ -1,0 +1,38 @@
+[
+  {
+    "task_id": "simple-maze-001",
+    "instructions": "Solve the simple maze before the episode ends.",
+    "game_factory": "arcengine_example:simple_maze",
+    "game_kwargs": {},
+    "metadata": {
+      "source": "ARCEngine/examples/simple_maze.py"
+    }
+  },
+  {
+    "task_id": "complex-maze-001",
+    "instructions": "Solve the complex maze before the energy budget runs out.",
+    "game_factory": "arcengine_example:complex_maze",
+    "game_kwargs": {},
+    "metadata": {
+      "source": "ARCEngine/examples/complex_maze.py"
+    }
+  },
+  {
+    "task_id": "merge-001",
+    "instructions": "Solve the merge puzzle before losing.",
+    "game_factory": "arcengine_example:merge",
+    "game_kwargs": {},
+    "metadata": {
+      "source": "ARCEngine/examples/merge.py"
+    }
+  },
+  {
+    "task_id": "merge-detach-001",
+    "instructions": "Solve the merge-detach puzzle before losing.",
+    "game_factory": "arcengine_example:merge_detach",
+    "game_kwargs": {},
+    "metadata": {
+      "source": "ARCEngine/examples/merge_detach.py"
+    }
+  }
+]

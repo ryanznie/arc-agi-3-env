@@ -1,0 +1,7 @@
+{
+  "episodes": 4,
+  "solve_rate": 0.0,
+  "truncation_rate": 1.0,
+  "average_steps": 277.0,
+  "average_reward": 0.0
+}

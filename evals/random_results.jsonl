@@ -1,0 +1,4 @@
+{"task_id":"simple-maze-001","episode_index":0,"seed":0,"solved":false,"reward":0.0,"truncated":true,"done_reason":"max_steps","steps_taken":512,"invalid_actions":0,"remaining_budget":null}
+{"task_id":"complex-maze-001","episode_index":0,"seed":10000,"solved":false,"reward":0.0,"truncated":true,"done_reason":"budget_exhausted","steps_taken":63,"invalid_actions":0,"remaining_budget":0}
+{"task_id":"merge-001","episode_index":0,"seed":20000,"solved":false,"reward":0.0,"truncated":true,"done_reason":"budget_exhausted","steps_taken":508,"invalid_actions":0,"remaining_budget":null}
+{"task_id":"merge-detach-001","episode_index":0,"seed":30000,"solved":false,"reward":0.0,"truncated":true,"done_reason":"budget_exhausted","steps_taken":25,"invalid_actions":0,"remaining_budget":null}

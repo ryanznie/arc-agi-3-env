@@ -1,0 +1,90 @@
+Metadata-Version: 2.4
+Name: arc-agi-3-env
+Version: 0.1.0
+Summary: PrimeIntellect environment package for ARC-AGI 3 style interactive rollouts
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: arcengine>=0.9.3
+Requires-Dist: datasets>=3.2.0
+Requires-Dist: verifiers
+
+# arc-agi-3-env
+
+PrimeIntellect / Verifiers environment package for ARC-AGI 3 style interactive tasks.
+
+This repo is intentionally thin:
+- `arc_agi_3_env.py` exposes `load_environment()`
+- `arc_agi_3_env_helpers/` contains action parsing, task loading, engine/session adapters, and formatting helpers
+- `tasks/` contains sample task specs
+
+## How It Relates To ARCEngine
+
+`ARCEngine` is the underlying game engine. Per the engine README:
+- a game subclasses `ARCBaseGame`
+- game logic lives in `step()`
+- actions are executed through `perform_action(ActionInput(...))`
+- observations come from the camera render path as a 64x64 palette-index grid
+- `GameAction.ACTION1` to `ACTION4` conventionally map to up/down/left/right
+- `ACTION5` is the contextual "space bar" action
+- `ACTION6` is a click action with `x,y` in `[0, 63]`
+- `ACTION7` is undo
+
+This repo does not replace that engine. It wraps an `ARCEngine` game into a Prime / Verifiers multi-turn environment so a model can iteratively observe, act, and be scored.
+
+## Install
+
+### Local development setup
+
+This assumes the sibling repo layout:
+
+```text
+Desktop/work/
+  ARCEngine/
+  arc-agi-3-env/
+```
+
+```bash
+cd /Users/ryanznie/Desktop/work/arc-agi-3-env
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e ../ARCEngine
+python -m pip install -e .
+```
+
+If you also want to run Prime evaluations locally, install the runtime dependencies:
+
+```bash
+python -m pip install datasets verifiers
+```
+
+### Smoke test
+
+This verifies the package imports and that the sample `ARCEngine` game can reset and step:
+
+```bash
+source .venv/bin/activate
+python - <<'PY'
+from arc_agi_3_env_helpers.sample_game import create_game
+from arcengine import ActionInput, GameAction
+
+game = create_game(max_actions=4)
+game.full_reset()
+frame = game.perform_action(ActionInput(id=GameAction.ACTION4), raw=False)
+print(frame.state)
+print(frame.frame[-1][0][0])
+PY
+```
+
+### Prime local eval
+
+```bash
+prime eval run . -m gpt-5-nano -n 1
+```
+
+## Notes
+
+- The default environment uses a small sample game built on `arcengine` so the package is runnable before the full ARC-AGI 3 task/game integration is wired in.
+- Replace the default `game_factory` with your ARC-AGI 3 factory as soon as that code exists.
+- The current prompt format sends the 64x64 observation as compact JSON. That is simple and model-agnostic, but not token-efficient.
+- `load_environment()` imports `verifiers` lazily, so the module itself can still be imported before the Prime runtime dependencies are installed.
