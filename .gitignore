@@ -1,0 +1,5 @@
+*.egg-info
+**_pycache__
+uv.lock
+**.jsonl
+**.json

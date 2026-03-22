@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "arc-agi-3-env"
+version = "0.1.0"
+description = "PrimeIntellect environment package for ARC-AGI 3 style interactive rollouts"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "arcengine>=0.9.3",
+    "datasets>=3.2.0",
+    "verifiers",
+]
+
+[tool.setuptools]
+py-modules = ["arc_agi_3_env"]
+packages = ["arc_agi_3_env_helpers", "tasks"]
+
+[tool.setuptools.package-data]
+tasks = ["*.json"]
