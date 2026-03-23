@@ -207,8 +207,9 @@ marimo/_lsp/
 __marimo__/
 
 # Local eval artifacts
-evals/recordings/
+environments/arc_agi_3_env/evals/recordings/
 environments/arc_agi_3_env/outputs/
+environments/arc_agi_3_env/.prime/
 
 # macOS
 .DS_Store

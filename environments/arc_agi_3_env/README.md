@@ -28,11 +28,10 @@ OPENAI_API_KEY=your_openai_key
 Run a local smoke evaluation:
 
 ```bash
-cd /Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env
 set -a
-source /Users/ryanznie/Desktop/work/arc-agi-3-env/.env
+source .env
 set +a
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -41,10 +40,11 @@ PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
 ```
 
 Notes:
+- Run these commands from the repo root.
 - The repo `.env` is loaded automatically by `arc_agi_3_env.py`, but `vf-eval` itself still needs the shell to see `OPENAI_API_KEY`, so source `.env` before running the command.
 - Use `-a` / `--env-args` to pass environment-specific configuration as a JSON object.
 - `ARC_API_KEY` and `ROOT_URL` are only required for `game_family="arc_agi"`.
-- `vf-eval` currently needs `PYTHONPATH="$PWD"` when run manually from the environment directory.
+- `vf-eval` currently needs `PYTHONPATH=environments/arc_agi_3_env` when run manually from the repo root.
 
 ### Environment Arguments
 | Arg | Type | Default | Description |
@@ -67,11 +67,10 @@ Notes:
 Smoke eval:
 
 ```bash
-cd /Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env
 set -a
-source /Users/ryanznie/Desktop/work/arc-agi-3-env/.env
+source .env
 set +a
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -82,24 +81,24 @@ PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
 Structured recording:
 
 ```bash
-cd /Users/ryanznie/Desktop/work/arc-agi-3-env
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env \
+  python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family simple_maze \
   --level-index 0 \
   --max-turns 8
 ```
 
-This writes an ARC-style `.recording.jsonl` under `evals/recordings/`.
+This writes an ARC-style `.recording.jsonl` under `environments/arc_agi_3_env/evals/recordings/`.
 
 Select a specific ARC-AGI puzzle:
 
 ```bash
 set -a
-source /Users/ryanznie/Desktop/work/arc-agi-3-env/.env
+source .env
 set +a
 
-uv run --project /Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env \
-  python /Users/ryanznie/Desktop/work/arc-agi-3-env/evals/run_recording.py \
+uv run --project environments/arc_agi_3_env \
+  python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family arc_agi \
   --game-id ft09-0d8bbf25 \
   --max-turns 3
@@ -109,7 +108,7 @@ Discover available ARC-AGI puzzle ids:
 
 ```bash
 set -a
-source /Users/ryanznie/Desktop/work/arc-agi-3-env/.env
+source .env
 set +a
 
 python - <<'PY'
@@ -151,4 +150,4 @@ This environment adapts `arcengine` game loops and ARC-AGI task instances into a
 
 - [PrimeIntellect Verifiers Environments](https://docs.primeintellect.ai/verifiers/environments)
 - [ARCEngine Package](https://pypi.org/project/arcengine/)
-- [Evals README](/Users/ryanznie/Desktop/work/arc-agi-3-env/evals/README.md)
+- [Evals README](/Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env/evals/README.md)

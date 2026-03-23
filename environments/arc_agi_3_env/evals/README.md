@@ -8,8 +8,7 @@ Run the simplest end-to-end eval against `simple_maze` level 0:
 set -a
 source .env
 set +a
-cd environments/arc_agi_3_env
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -17,14 +16,14 @@ PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
   -n 1 -r 1
 ```
 
-This is the supported path because the current `verifiers` worker import path still needs `PYTHONPATH` set explicitly for this local environment.
+Run these commands from the repo root. This is the supported path because the current `verifiers` worker import path still needs `PYTHONPATH` set explicitly for this local environment.
 
 ## Recording Run
 
 If you want an ARC-style `.recording.jsonl`, use:
 
 ```bash
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family simple_maze \
   --level-index 0 \
   --max-turns 8
@@ -33,17 +32,17 @@ uv run --project environments/arc_agi_3_env python evals/run_recording.py \
 To test without calling OpenAI, use the built-in random policy:
 
 ```bash
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env python environments/arc_agi_3_env/evals/run_recording.py \
   --model random \
   --game-family simple_maze \
   --level-index 0 \
   --max-turns 8
 ```
 
-This writes a file under `evals/recordings/` such as:
+This writes a file under `environments/arc_agi_3_env/evals/recordings/` such as:
 
 ```text
-evals/recordings/simple_maze.gpt-4.1-mini.1.<guid>.recording.jsonl
+environments/arc_agi_3_env/evals/recordings/simple_maze.gpt-4.1-mini.1.<guid>.recording.jsonl
 ```
 
 The file contains:
@@ -64,8 +63,7 @@ Example summary from a recent `simple_maze` run:
 set -a
 source .env
 set +a
-cd environments/arc_agi_3_env
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -82,8 +80,7 @@ After the local smoke test works, switch the env args:
 set -a
 source .env
 set +a
-cd environments/arc_agi_3_env
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -127,7 +124,7 @@ set -a
 source .env
 set +a
 
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family arc_agi \
   --game-id ft09-0d8bbf25 \
   --max-turns 3
@@ -139,8 +136,7 @@ Run `vf-eval` on one specific puzzle:
 set -a
 source .env
 set +a
-cd environments/arc_agi_3_env
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \

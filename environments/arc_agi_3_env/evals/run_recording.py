@@ -14,11 +14,11 @@ import requests
 from dotenv import load_dotenv
 
 
-ROOT_DIR = Path(__file__).resolve().parents[1]
-ENV_DIR = ROOT_DIR / "environments" / "arc_agi_3_env"
-RECORDINGS_DIR = ROOT_DIR / "evals" / "recordings"
+ENV_DIR = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[2]
+RECORDINGS_DIR = ENV_DIR / "evals" / "recordings"
 
-load_dotenv(ROOT_DIR / ".env", override=False)
+load_dotenv(REPO_ROOT / ".env", override=False)
 
 
 def _timestamp() -> str:

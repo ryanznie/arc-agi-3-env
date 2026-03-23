@@ -25,8 +25,7 @@ Run the local smoke eval:
 set -a
 source .env
 set +a
-cd environments/arc_agi_3_env
-PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
+PYTHONPATH=environments/arc_agi_3_env uv run --project environments/arc_agi_3_env vf-eval arc-agi-3-env \
   -m gpt-4.1-mini \
   -b https://api.openai.com/v1 \
   -k OPENAI_API_KEY \
@@ -37,8 +36,7 @@ PYTHONPATH="$PWD" uv run vf-eval arc-agi-3-env \
 Generate an ARC-style `.recording.jsonl`:
 
 ```bash
-cd /Users/ryanznie/Desktop/work/arc-agi-3-env
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family simple_maze \
   --level-index 0 \
   --max-turns 8
@@ -51,7 +49,7 @@ set -a
 source .env
 set +a
 
-uv run --project environments/arc_agi_3_env python evals/run_recording.py \
+uv run --project environments/arc_agi_3_env python environments/arc_agi_3_env/evals/run_recording.py \
   --game-family arc_agi \
   --game-id ft09-0d8bbf25 \
   --max-turns 3
@@ -59,4 +57,4 @@ uv run --project environments/arc_agi_3_env python evals/run_recording.py \
 
 See:
 - [environment README](/Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env/README.md)
-- [evals README](/Users/ryanznie/Desktop/work/arc-agi-3-env/evals/README.md)
+- [evals README](/Users/ryanznie/Desktop/work/arc-agi-3-env/environments/arc_agi_3_env/evals/README.md)
